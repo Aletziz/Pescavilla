@@ -1,0 +1,1157 @@
+/* ============================================
+   SISTEMA DE DISEÑO - VARIABLES CSS
+   ============================================ */
+:root {
+    /* Colores del sidebar */
+    --sidebar-bg: #ffffff;
+    --sidebar-border: #e5e7eb;
+
+    /* Tipografía */
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --text-muted: #9ca3af;
+
+    /* Colores de acento */
+    --accent-color: #2563eb;
+    --accent-hover: #1d4ed8;
+    --accent-light: #3b82f6;
+
+    /* Backgrounds */
+    --bg-page: #f9fafb;
+    --bg-hover: #f3f4f6;
+    --bg-active: #eff6ff;
+
+    /* Sombras */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+
+    /* Transiciones */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   ESTILOS GLOBALES BASE
+   ============================================ */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Roboto", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   SIDEBAR DESKTOP - ESTRUCTURA
+   ============================================ */
+aside {
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--sidebar-border);
+    box-shadow: var(--shadow-sm);
+}
+
+aside.vh-100 {
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+/* Scrollbar personalizada para el sidebar */
+aside.vh-100::-webkit-scrollbar {
+    width: 6px;
+}
+
+aside.vh-100::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+aside.vh-100::-webkit-scrollbar-thumb {
+    background-color: var(--sidebar-border);
+    border-radius: 3px;
+}
+
+aside.vh-100::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-muted);
+}
+
+/* Logo section */
+aside .logo-container {
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid var(--sidebar-border);
+    background-color: var(--sidebar-bg);
+}
+
+aside .logo-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Navigation section */
+aside nav {
+    padding: 1.5rem 1rem;
+}
+
+/* Título de sección */
+.nav-title {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    padding: 0.625rem 1rem 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.nav-title:first-child {
+    margin-top: 0;
+}
+
+/* ============================================
+   SIDEBAR LINKS - ESTILOS CONSISTENTES
+   ============================================ */
+
+/* Reset completo de Bootstrap y estilos base */
+.side-nav-link,
+a.side-nav-link,
+.nav-link.side-nav-link,
+a.nav-link.side-nav-link,
+aside a.side-nav-link,
+aside .nav-link.side-nav-link,
+.offcanvas a.side-nav-link,
+.offcanvas .nav-link.side-nav-link {
+    /* Display y layout */
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+
+    /* Colores - Estado normal */
+    color: var(--text-primary) !important;
+    background-color: transparent !important;
+
+    /* Espaciado */
+    padding: 0.75rem 1rem !important;
+    margin: 0.125rem 0 !important;
+
+    /* Bordes y forma */
+    border: none !important;
+    border-radius: 0.5rem !important;
+    outline: none !important;
+
+    /* Tipografía */
+    font-weight: 500 !important;
+    font-size: 0.938rem !important;
+    line-height: 1.5 !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+
+    /* Interacción */
+    cursor: pointer !important;
+    user-select: none !important;
+
+    /* Animación suave */
+    transition: all var(--transition-fast) !important;
+
+    /* Desactivar efectos de Bootstrap */
+    box-shadow: none !important;
+}
+
+/* Estado Hover - Fondo gris claro */
+.side-nav-link:hover,
+a.side-nav-link:hover,
+.nav-link.side-nav-link:hover,
+a.nav-link.side-nav-link:hover,
+aside a.side-nav-link:hover,
+aside .nav-link.side-nav-link:hover,
+.offcanvas a.side-nav-link:hover,
+.offcanvas .nav-link.side-nav-link:hover {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-hover) !important;
+    transform: translateX(2px) !important;
+}
+
+/* Estado Active - Fondo azul claro, texto azul, negrita */
+.side-nav-link.active,
+a.side-nav-link.active,
+.nav-link.side-nav-link.active,
+a.nav-link.side-nav-link.active,
+aside a.side-nav-link.active,
+aside .nav-link.side-nav-link.active,
+.offcanvas a.side-nav-link.active,
+.offcanvas .nav-link.side-nav-link.active {
+    color: var(--accent-color) !important;
+    background-color: var(--bg-active) !important;
+    font-weight: 600 !important;
+}
+
+/* Estado Active + Hover */
+.side-nav-link.active:hover,
+a.side-nav-link.active:hover,
+.nav-link.side-nav-link.active:hover,
+a.nav-link.side-nav-link.active:hover,
+aside a.side-nav-link.active:hover,
+aside .nav-link.side-nav-link.active:hover,
+.offcanvas a.side-nav-link.active:hover,
+.offcanvas .nav-link.side-nav-link.active:hover {
+    color: var(--accent-hover) !important;
+    background-color: #dbeafe !important;
+    transform: translateX(2px) !important;
+}
+
+/* Estado Focus (accesibilidad) */
+.side-nav-link:focus,
+a.side-nav-link:focus,
+.nav-link.side-nav-link:focus,
+a.nav-link.side-nav-link:focus {
+    outline: 2px solid var(--accent-color) !important;
+    outline-offset: 2px !important;
+}
+
+/* Iconos dentro de los enlaces */
+.side-nav-link i,
+a.side-nav-link i {
+    font-size: 1.125rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+/* ============================================
+   SIDEBAR MÓVIL (OFFCANVAS)
+   ============================================ */
+
+/* Contenedor offcanvas */
+.offcanvas {
+    background-color: var(--sidebar-bg) !important;
+    border-right: 1px solid var(--sidebar-border) !important;
+    width: 280px !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+.offcanvas-header {
+    padding: 1.5rem 1rem !important;
+    border-bottom: 1px solid var(--sidebar-border) !important;
+    background-color: var(--sidebar-bg) !important;
+    position: relative;
+}
+
+.offcanvas-header .btn-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    opacity: 0.5;
+    transition: opacity var(--transition-base);
+    width: 24px;
+    height: 24px;
+    background-size: 12px;
+}
+
+.offcanvas-header .btn-close:hover {
+    opacity: 1;
+}
+
+.offcanvas-body {
+    padding: 0 !important;
+    background-color: var(--sidebar-bg);
+}
+
+/* Navigation dentro del offcanvas */
+.offcanvas-body nav {
+    padding: 1.5rem 1rem;
+}
+
+/* ============================================
+   MOBILE HEADER BAR
+   ============================================ */
+
+.mobile-header-bar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: var(--sidebar-bg);
+    border-bottom: 1px solid var(--sidebar-border);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    z-index: 1050;
+    box-shadow: var(--shadow-sm);
+}
+
+.mobile-header-bar .logo-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.mobile-header-bar .logo-container img {
+    height: 32px;
+    width: auto;
+}
+
+/* Mobile menu toggle button */
+.mobile-menu-toggle {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    z-index: 1061;
+    background-color: transparent;
+    border: none;
+    padding: 0.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-base);
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.mobile-menu-toggle:hover {
+    background-color: var(--bg-hover);
+}
+
+.mobile-menu-toggle:active {
+    background-color: var(--bg-active);
+    transform: translateY(-50%) scale(0.95);
+}
+
+.mobile-menu-toggle i {
+    font-size: 1.375rem;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+/* ============================================
+   FIN ESTILOS SIDEBAR
+   ============================================ */
+
+/* ============================================
+   MAIN CONTENT AREA
+   ============================================ */
+
+#main {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: var(--bg-page);
+}
+
+/* Scrollbar personalizada para main */
+#main::-webkit-scrollbar {
+    width: 8px;
+}
+
+#main::-webkit-scrollbar-track {
+    background: var(--bg-page);
+}
+
+#main::-webkit-scrollbar-thumb {
+    background-color: var(--sidebar-border);
+    border-radius: 4px;
+}
+
+#main::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-muted);
+}
+
+/* ============================================
+   CARDS Y CONTENEDORES
+   ============================================ */
+
+/* Mejoras para las cards del contenido */
+.card {
+    border: 1px solid var(--sidebar-border);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.card-header {
+    background-color: var(--sidebar-bg) !important;
+    border-bottom: 1px solid var(--sidebar-border);
+    font-weight: 600;
+    color: var(--text-primary) !important;
+    padding: 1rem 1.5rem;
+}
+
+.card-header h5 {
+    color: var(--text-primary);
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+/* Header de las vistas */
+header.bg-dark {
+    background-color: var(--sidebar-bg) !important;
+    border-bottom: 2px solid var(--accent-color) !important;
+    border-left: none !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+header.bg-dark span {
+    color: var(--text-primary) !important;
+    font-weight: 600;
+}
+
+/* Tablas con estilo minimalista y moderno */
+.table {
+    color: var(--text-primary);
+    margin-bottom: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+/* Eliminar bordes predeterminados de Bootstrap */
+.table-bordered {
+    border: none !important;
+}
+
+.table-bordered > :not(caption) > * > * {
+    border-width: 0;
+}
+
+/* Header de tabla con estilo minimalista */
+.table thead.table-dark {
+    background-color: var(--bg-light) !important;
+    border-bottom: 2px solid var(--sidebar-border);
+}
+
+.table thead.table-dark th {
+    color: var(--text-secondary) !important;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.875rem 1rem;
+    border: none;
+    background-color: transparent !important;
+}
+
+/* Filas de la tabla */
+.table tbody tr {
+    transition: none;
+    border-bottom: 1px solid var(--sidebar-border);
+}
+
+.table tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* Celdas de la tabla */
+.table tbody td {
+    padding: 1rem;
+    vertical-align: middle;
+    border: none;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+/* Primera columna (números) con estilo especial */
+.table tbody td:first-child {
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.8125rem;
+}
+
+/* Eliminar rayas alternadas de Bootstrap */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: transparent;
+}
+
+/* Mensaje cuando no hay datos */
+.table tbody td.text-center {
+    padding: 2rem 1rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Contenedor de tabla responsive */
+.table-responsive {
+    border-radius: 0;
+    margin: 0;
+}
+
+/* Tabla compacta para Embalses */
+.table-sm {
+    font-size: 0.875rem !important;
+}
+
+.table-sm th,
+.table-sm td {
+    padding: 0.5rem 0.5rem !important;
+    vertical-align: middle !important;
+}
+
+/* Text truncate para columnas largas */
+.text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Alinear números a la derecha */
+.text-end {
+    text-align: right !important;
+}
+
+/* Badges compactos */
+.badge {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Botones de acción compactos - cuadrados pequeños */
+.btn-sm {
+    padding: 0.25rem;
+    font-size: 0.875rem;
+    line-height: 1;
+    border-radius: 0.25rem;
+}
+
+.btn-sm i {
+    font-size: 0.875rem;
+    line-height: 1;
+}
+
+/* Espaciado del card-body para tablas */
+.card-body.p-3 {
+    padding: 0 !important;
+}
+
+.card-body .table-responsive {
+    padding: 0;
+}
+
+/* Botones de acción con estilo minimalista y moderno */
+.btn-sm {
+    padding: 0.5rem 0.875rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    font-weight: 400;
+    transition: all 0.2s ease;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-info {
+    background-color: #eff6ff;
+    border-color: #eff6ff;
+    color: #2563eb;
+}
+
+.btn-info:hover {
+    background-color: #dbeafe;
+    border-color: #dbeafe;
+    color: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.btn-warning {
+    background-color: #fef3c7;
+    border-color: #fef3c7;
+    color: #d97706;
+}
+
+.btn-warning:hover {
+    background-color: #fde68a;
+    border-color: #fde68a;
+    color: #b45309;
+    transform: translateY(-1px);
+}
+
+.btn-danger {
+    background-color: #fee2e2;
+    border-color: #fee2e2;
+    color: #dc2626;
+}
+
+.btn-danger:hover {
+    background-color: #fecaca;
+    border-color: #fecaca;
+    color: #b91c1c;
+    transform: translateY(-1px);
+}
+
+/* Contenedor de botones de acción */
+.d-flex.gap-1 {
+    gap: 0.5rem !important;
+}
+
+/* Botón de agregar con estilo acento */
+.action-chip-primary {
+    background-color: var(--accent-color) !important;
+    color: white !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all 0.15s ease;
+    border: none;
+}
+
+.action-chip-primary:hover {
+    background-color: var(--accent-hover) !important;
+    color: white !important;
+}
+
+/* Botón de ordenar con estilo secundario */
+.action-chip-secondary {
+    background-color: #f3f4f6 !important;
+    color: #374151 !important;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all 0.15s ease;
+    border: 1px solid #e5e7eb !important;
+}
+
+.action-chip-secondary:hover {
+    background-color: #e5e7eb !important;
+    color: #1f2937 !important;
+    border-color: #d1d5db !important;
+}
+
+.action-chip-secondary::after {
+    display: none !important; /* Quitar la flecha por defecto de Bootstrap */
+}
+
+/* Badges con colores sincronizados y estilo moderno */
+.badge {
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.025em;
+}
+
+.badge.bg-primary {
+    background-color: #dbeafe !important;
+    color: #1e40af !important;
+}
+
+.badge.bg-success {
+    background-color: #d1fae5 !important;
+    color: #065f46 !important;
+}
+
+/* Scroll personalizado para las cards */
+.card-scroll {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.card-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.card-scroll::-webkit-scrollbar-track {
+    background: var(--bg-light);
+}
+
+.card-scroll::-webkit-scrollbar-thumb {
+    background: var(--sidebar-border);
+    border-radius: 3px;
+}
+
+.card-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}
+
+/* Mejoras adicionales para formularios en tablas */
+form {
+    margin: 0;
+}
+
+/* Ajustes para alineación de emojis en botones */
+.btn-sm {
+    line-height: 1;
+}
+
+/* Estilo para celdas de acciones */
+.table tbody td:last-child {
+    text-align: center;
+}
+
+/* Mejora de espaciado entre elementos */
+.row.mb-2 {
+    margin-bottom: 1.5rem !important;
+}
+
+.row.mb-3 {
+    margin-bottom: 2rem !important;
+}
+
+/* ============================================ */
+/* RESPONSIVE DESIGN - MOBILE FIRST */
+/* ============================================ */
+
+/* Mobile (< 768px) */
+@media (max-width: 767.98px) {
+    /* Layout principal */
+    body {
+        overflow-x: hidden;
+        padding-top: 60px; /* Altura del header móvil */
+    }
+
+    .container-fluid {
+        padding: 0 !important;
+    }
+
+    .row {
+        margin: 0 !important;
+    }
+
+    /* Contenido principal ocupa todo el ancho */
+    #main {
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        overflow-x: hidden;
+        padding: 0 !important;
+    }
+
+    /* Header principal sin margen extra */
+    header.bg-dark {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 1040 !important;
+        padding: 0.75rem 1rem !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
+
+    header.bg-dark .fs-3,
+    header.bg-dark .fs-4 {
+        font-size: 1.125rem !important;
+        margin-left: 0 !important;
+    }
+
+    /* Contenedor principal */
+    main.container-fluid {
+        padding: 0 !important;
+        min-height: 100vh !important;
+    }
+
+    /* Cards mobile */
+    .card {
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+        margin-bottom: 0 !important;
+        box-shadow: none !important;
+    }
+
+    .card-header {
+        padding: 0.875rem 1rem !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 0.75rem !important;
+    }
+
+    .card-header h5 {
+        font-size: 0.9375rem !important;
+        margin-bottom: 0 !important;
+    }
+
+    .card-header nav {
+        width: 100%;
+    }
+
+    .card-body {
+        padding: 0 !important;
+    }
+
+    /* Tablas responsivas */
+    .table-responsive {
+        margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table {
+        font-size: 0.75rem !important;
+        margin: 0 !important;
+        min-width: 700px; /* Permite scroll horizontal */
+    }
+
+    .table thead.table-dark th {
+        font-size: 0.625rem !important;
+        padding: 0.625rem 0.5rem !important;
+        white-space: nowrap !important;
+        position: sticky;
+        top: 0;
+        background-color: var(--bg-light) !important;
+    }
+
+    .table tbody td {
+        padding: 0.625rem 0.5rem !important;
+        font-size: 0.75rem !important;
+        white-space: nowrap;
+    }
+
+    /* Columna de número oculta en móvil */
+    .table thead th:first-child,
+    .table tbody td:first-child {
+        display: none;
+    }
+
+    /* Botones de acción verticales */
+    .table .d-flex.gap-1 {
+        flex-direction: column !important;
+        gap: 0.375rem !important;
+        min-width: 100px;
+    }
+
+    .table .d-flex.gap-1 .btn-sm {
+        width: 100% !important;
+        font-size: 0.75rem !important;
+        padding: 0.375rem 0.5rem !important;
+        white-space: nowrap;
+    }
+
+    .table .d-flex.gap-1 form {
+        width: 100%;
+    }
+
+    /* Badges más pequeños */
+    .badge {
+        font-size: 0.625rem !important;
+        padding: 0.25rem 0.5rem !important;
+    }
+
+    /* Action chips */
+    .action-chip-primary {
+        font-size: 0.8125rem !important;
+        padding: 0.5rem 0.875rem !important;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Formularios mobile */
+    .form-label {
+        font-size: 0.875rem !important;
+        font-weight: 600;
+    }
+
+    .form-control,
+    .form-select {
+        font-size: 0.875rem !important;
+        padding: 0.625rem 0.75rem !important;
+        min-height: 44px;
+    }
+
+    .btn {
+        font-size: 0.875rem !important;
+        padding: 0.625rem 1rem !important;
+        min-height: 44px;
+    }
+
+    /* Mobile header bar visible */
+    .mobile-header-bar {
+        display: flex !important;
+    }
+
+    /* Offcanvas ajustes */
+    .offcanvas {
+        max-width: 280px !important;
+        margin-top: 60px; /* Debajo del header móvil */
+    }
+
+    .offcanvas-header {
+        padding: 1rem !important;
+    }
+
+    .offcanvas-header .logo-container {
+        padding: 1rem 0 !important;
+    }
+
+    .offcanvas-header .logo-container img {
+        width: 140px !important;
+        height: auto !important;
+    }
+
+    .offcanvas-body nav {
+        padding: 1rem !important;
+    }
+
+    /* Cards scroll */
+    .card-scroll {
+        max-height: none !important;
+        height: auto !important;
+    }
+
+    /* Ajustes de espaciado */
+    .mb-2,
+    .mb-3 {
+        margin-bottom: 0 !important;
+    }
+
+    .p-3 {
+        padding: 0.5rem !important;
+    }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023.98px) {
+    /* Sidebar más estrecho */
+    aside {
+        width: 220px !important;
+    }
+
+    aside .logo-container img {
+        width: 140px !important;
+        height: auto;
+    }
+
+    /* Tablas más compactas */
+    .table {
+        font-size: 0.8125rem;
+    }
+
+    .table thead.table-dark th {
+        font-size: 0.6875rem;
+        padding: 0.75rem 0.625rem;
+    }
+
+    .table tbody td {
+        padding: 0.75rem 0.625rem;
+        font-size: 0.8125rem;
+    }
+
+    .btn-sm {
+        font-size: 0.8125rem;
+        padding: 0.4375rem 0.625rem;
+    }
+}
+
+/* Touch devices - mejorar áreas táctiles */
+@media (hover: none) and (pointer: coarse) {
+    .btn,
+    .btn-sm,
+    .side-nav-link,
+    .form-control,
+    .form-select,
+    .action-chip-primary {
+        min-height: 44px !important;
+    }
+
+    /* Espaciado entre elementos tocables */
+    .table .d-flex.gap-1 {
+        gap: 0.5rem !important;
+    }
+}
+
+/* Orientación horizontal en móviles */
+@media (max-width: 767.98px) and (orientation: landscape) {
+    header.bg-dark {
+        padding: 0.5rem 1rem !important;
+    }
+
+    header.bg-dark .fs-3,
+    header.bg-dark .fs-4 {
+        font-size: 1rem !important;
+    }
+
+    .mobile-menu-toggle {
+        top: 0.375rem !important;
+        left: 0.375rem !important;
+        padding: 0.5rem 0.75rem !important;
+    }
+
+    .card-header {
+        padding: 0.625rem 0.875rem !important;
+    }
+}
+
+/* Header minimalista y profesional - Versión fondo claro */
+.header-link-light {
+    color: #6b7280;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.header-link-light:hover {
+    color: #111827;
+    background-color: #f3f4f6;
+}
+
+.header-link-light.active {
+    color: #111827;
+    background-color: #e5e7eb;
+    font-weight: 600;
+}
+
+.header-dropdown-btn-light {
+    background: #ffffff;
+    border: 1px solid #d1d5db;
+    color: #374151;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.header-dropdown-btn-light:hover {
+    background-color: #f9fafb;
+    border-color: #9ca3af;
+    color: #111827;
+}
+
+.header-dropdown-btn-light:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: #3b82f6;
+}
+
+/* Dropdown menu claro profesional */
+.dropdown-menu {
+    background-color: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+    border-radius: 0.5rem !important;
+    padding: 0.5rem !important;
+    margin-top: 0.5rem !important;
+    z-index: 1050 !important;
+    display: none;
+}
+
+.dropdown-menu.show {
+    display: block !important;
+}
+
+.dropdown-menu .dropdown-item {
+    color: #374151 !important;
+    padding: 0.5rem 0.75rem !important;
+    border-radius: 0.375rem !important;
+    font-size: 0.9rem !important;
+    transition: all 0.15s ease !important;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: #f3f4f6 !important;
+    color: #111827 !important;
+}
+
+.dropdown-menu .dropdown-item:active {
+    background-color: #e5e7eb !important;
+    color: #111827 !important;
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+    .header-link-light,
+    .header-dropdown-btn-light {
+        font-size: 0.875rem;
+        padding: 0.45rem 0.875rem;
+    }
+}
+
+/* Header minimalista y profesional - Versión fondo oscuro (legacy) */
+.header-link {
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.header-link:hover {
+    color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.header-link.active {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.15);
+    font-weight: 600;
+}
+
+.header-dropdown-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.75);
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+}
+
+.header-dropdown-btn:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.header-dropdown-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+/* Dropdown menu oscuro profesional */
+.dropdown-menu-dark {
+    background-color: #1f2937;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
+        0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.dropdown-menu-dark .dropdown-item {
+    color: rgba(255, 255, 255, 0.8);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.375rem;
+    font-size: 0.9rem;
+    transition: all 0.15s ease;
+}
+
+.dropdown-menu-dark .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+/* Responsive */
+@media (max-width: 767.98px) {
+    .header-link,
+    .header-dropdown-btn {
+        font-size: 0.875rem;
+        padding: 0.45rem 0.875rem;
+    }
+}
