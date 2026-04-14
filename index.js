@@ -5,8 +5,6 @@ import notFound from "./backend/middlewares/global/notFound.js"
 import errorHandler from "./backend/middlewares/global/errorHandler.js";
 
 
-
-
 const app = express();
 app.use(cors());
 app.use(express.json());

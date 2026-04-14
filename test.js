@@ -2,7 +2,7 @@ import pool from "./backend/config/database.js";
 
 async function testConnection() {
   try {
-    const result = await pool.query('SELECT * FROM public.ORGANISMO');
+    const result = await pool.query('SELECT * FROM public.UEB');
     console.log('✅ Conexión exitosa a PostgreSQL');
     console.log(result.rows)
     
