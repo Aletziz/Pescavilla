@@ -18,6 +18,11 @@ app.get('/', (req, res) => {
   });
 });
 
+app.use("/organismo",)
+
+
+
+
 app.use(notFound);
 app.use(errorHandler);
 

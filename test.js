@@ -14,4 +14,18 @@ async function testConnection() {
   }
 }
 
-testConnection();
+//testConnection();
+
+import { OrganismoRepositoryPostgres } from "./backend/repository/OrganismoPostgres.js";
+
+const OrganismoPostgre = new OrganismoRepositoryPostgres();
+
+const result = await OrganismoPostgre.findAll();
+
+//console.log(result);
+
+import { OrganismoService } from "./backend/service/organismo.service.js";
+
+const OrgServive = new OrganismoService(OrganismoPostgre);
+
+console.log(await OrgServive.getAll());
