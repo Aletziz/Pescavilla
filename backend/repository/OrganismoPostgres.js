@@ -3,6 +3,7 @@ import { OrganismoRepository } from "../interfaces/IOrganismoRepository.js";
 import pool from "../config/database.js";
 
 export class OrganismoRepositoryPostgres extends OrganismoRepository {
+  
   async findAll() {
     try {
       const query = "SELECT id_organismo, nombre FROM organismo";
@@ -15,8 +16,8 @@ export class OrganismoRepositoryPostgres extends OrganismoRepository {
 
     } catch (error) {
       console.error("Error en OrganismoRepository.findAll:", error);
-
       throw new Error("Error al obtener organismos");
     }
   }
+  
 }

@@ -25,6 +25,9 @@ const result = await OrganismoPostgre.findAll();
 //console.log(result);
 
 import { OrganismoService } from "./backend/service/organismo.service.js";
+import { OrganismoController } from "./backend/controller/OrganismoController.js";
+
+
 
 const OrgServive = new OrganismoService(OrganismoPostgre);
 

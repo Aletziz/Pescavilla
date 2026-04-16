@@ -4,7 +4,13 @@ import dotenv from "dotenv";
 import notFound from "./backend/middlewares/global/notFound.js"
 import errorHandler from "./backend/middlewares/global/errorHandler.js";
 
+//ensambladores
+import buildOrganismoModule from "./backend/bootstrap/organismo.module.js";
 
+// router
+const organismoRouter = buildOrganismoModule();
+
+// configuracion de express
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -18,11 +24,11 @@ app.get('/', (req, res) => {
   });
 });
 
-app.use("/organismo",)
+app.use("/organismo", organismoRouter)
 
 
 
-
+// rutas no definidas
 app.use(notFound);
 app.use(errorHandler);
 
