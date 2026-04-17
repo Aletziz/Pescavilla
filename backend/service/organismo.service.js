@@ -60,4 +60,54 @@ export class OrganismoService{
             throw new AppError("Error al obtener UEBs del organismo", 500);
         }
     }
+
+    async delete(id){
+        try{
+            const organismo = await this.repository.findById(id);
+            
+            if(!organismo){
+                throw new AppError(
+                    "Organismo no existe",
+                    404
+                )
+            }
+
+            await this.repository.delete(id);
+            return { mensaje: "Organismo eliminado correctamente", id };
+        }catch(error){
+            if(error instanceof AppError){
+                throw error
+            }
+            console.error("Error en OrganismoService.delete:", error);
+            throw new AppError(
+                "Error al eliminar el organismo",
+                500
+            );
+        }
+    }
+
+    async update(id, data){
+        try{
+            const organismo = await this.repository.findById(id);
+            
+            if(!organismo){
+                throw new AppError(
+                    "Organismo no existe",
+                    404
+                )
+            }
+
+            const organismoActualizado = new Organismo({nombre: data.nombre});
+            return await this.repository.update(id, organismoActualizado);
+        }catch(error){
+            if(error instanceof AppError){
+                throw error
+            }
+            console.error("Error en OrganismoService.update:", error);
+            throw new AppError(
+                "Error al actualizar el organismo",
+                500
+            );
+        }
+    }
 }

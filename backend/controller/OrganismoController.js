@@ -24,4 +24,16 @@ export class OrganismoController{
         const data = await this.servicio.getUebsByOrganismo(id);
         res.json(data);
     }
+
+    delete = async (req, res, next) => {
+        const { id } = req.params;
+        const data = await this.servicio.delete(id);
+        res.json(data);
+    }
+
+    update = async (req, res, next) => {
+        const { id } = req.params;
+        const data = await this.servicio.update(id, req.body);
+        res.json(data);
+    }
 }

@@ -86,5 +86,42 @@ export class OrganismoRepositoryPostgres extends OrganismoRepository {
     }
   }
 
+  async delete(idOrganismo) {
+    try {
+      const query = "DELETE FROM organismo WHERE id_organismo = $1 RETURNING id_organismo";
+      const result = await pool.query(query, [idOrganismo]);
+
+      if (result.rows.length === 0) {
+        return null;
+      }
+
+      return result.rows[0];
+    } catch (error) {
+      console.error("Error en OrganismoRepository.delete:", error);
+      throw new Error("Error al eliminar organismo");
+    }
+  }
+
+  async update(id, data) {
+    try {
+      const safeName = data.nombre.replace(/'/g, "''");
+      const query = `UPDATE organismo SET nombre = $1 WHERE id_organismo = $2 RETURNING id_organismo, nombre`;
+      const result = await pool.query(query, [safeName, id]);
+
+      if (result.rows.length === 0) {
+        return null;
+      }
+
+      const row = result.rows[0];
+      return new Organismo({
+        id_organismo: row.id_organismo,
+        nombre: row.nombre
+      });
+    } catch (error) {
+      console.error("Error en OrganismoRepository.update:", error);
+      throw new Error("Error al actualizar organismo");
+    }
+  }
+
   
 }
