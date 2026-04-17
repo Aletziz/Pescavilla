@@ -3,10 +3,7 @@ import { z } from "zod";
 
 // ID (params)
 export const idSchema = z.object({
-  id: z
-    .string()
-    .transform(Number)
-    .refine(v => Number.isInteger(v) && v > 0),
+  id: z.coerce.number().int().positive(),
 });
 
 

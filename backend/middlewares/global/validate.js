@@ -1,7 +1,7 @@
-const validate = (schema) => (req, res, next) => {
+const validate = (schema, property = "body") => (req, res, next) => {
   try {
     // valida y reemplaza el body con datos limpios
-    req.body = schema.parse(req.body);
+    req[property] = schema.parse(req[property]);
 
     next(); // sigue al controller
   } catch (err) {

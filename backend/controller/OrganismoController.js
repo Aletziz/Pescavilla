@@ -8,4 +8,10 @@ export class OrganismoController{
         const data = await this.servicio.getAll();
         res.json(data);
     };
+
+    findById = async (req, res, next) => {
+        const {id} = req.params;
+        const data = await this.servicio.findById(id);
+        res.json(data);
+    }
 }

@@ -31,4 +31,11 @@ import { OrganismoController } from "./backend/controller/OrganismoController.js
 
 const OrgServive = new OrganismoService(OrganismoPostgre);
 
-console.log(await OrgServive.getAll());
+//console.log(await OrgServive.getAll());
+
+const result2 = await pool.query(`
+      SELECT id_organismo, nombre 
+      FROM organismo 
+      WHERE id_organismo = 9001
+    `);
+console.log(result2.rows);

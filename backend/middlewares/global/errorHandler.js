@@ -1,13 +1,30 @@
+import {ZodError} from "zod";
+import { AppError } from "../../utils/AppError.js";
+
+
 const errorHandler = (err, req, res, next) => {
-  console.error("❌ ERROR:", err);
 
-  const statusCode = err.statusCode || 500;
+  if (err instanceof ZodError) {
+    return res.status(400).json({
+      error: "Datos inválidos",
+      details: err.issues.map(e => ({
+        field: e.path.join("."),
+        message: e.message,
+      })),
+    });
+  }
 
-  res.status(statusCode).json({
-    status: "ERROR",
-    message: err.message || "Error interno del servidor",
-    path: req.path,
-    method: req.method,
+  if (err instanceof AppError) {
+    return res.status(err.statusCode).json({
+      error: err.message,
+      status: err.statusCode
+    });
+  }
+
+  console.error(err);
+
+  return res.status(500).json({
+    error: "Error interno del servidor",
   });
 };
 

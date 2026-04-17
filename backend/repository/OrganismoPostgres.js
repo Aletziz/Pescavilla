@@ -19,5 +19,29 @@ export class OrganismoRepositoryPostgres extends OrganismoRepository {
       throw new Error("Error al obtener organismos");
     }
   }
+
+  async findById(id) {
+    try {
+          
+      const query = `
+        SELECT id_organismo, nombre 
+        FROM organismo 
+        WHERE id_organismo = ${id}`;
+      const result = await pool.query(query);
+
+      // Si no encontró nada
+      if (result.rows.length === 0) {
+        return null;
+      }
+
+      // Devuelve el primer registro
+      return result.rows[0];
+
+    } catch (error) {
+      console.error("Error en OrganismoRepository.findById:", error);
+      throw new Error("Error al obtener organismo por id");
+    }
+  }
+
   
 }
