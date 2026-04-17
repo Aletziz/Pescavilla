@@ -1,4 +1,5 @@
 import {AppError} from "../utils/AppError.js"
+import { Organismo } from "../model/organismoModel.js";
 
 export class OrganismoService{
     constructor(repository){
@@ -17,11 +18,8 @@ export class OrganismoService{
     }
     async findById(id){
         try{
-            console.log(id)
             const organismo = await this.repository.findById(id);
             
-            console.log(organismo);
-
             if(!organismo){
                 throw new AppError(
                     "Organismo no existe",
@@ -38,6 +36,18 @@ export class OrganismoService{
                 "Error al obtener el organismo",
                 500
             );
+        }
+    }
+
+    async create(data){
+        try{
+            
+            const organismo = new Organismo({nombre: data.nombre});
+            return await this.repository.create(organismo);
+            
+        }catch(error){
+            console.log("Error en OrganismoService.create", error)
+            throw new AppError("Error creando organismo",500);
         }
     }
 }

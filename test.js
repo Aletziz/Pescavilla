@@ -38,4 +38,7 @@ const result2 = await pool.query(`
       FROM organismo 
       WHERE id_organismo = 9001
     `);
-console.log(result2.rows);
+//console.log(result2.rows);
+
+const result3 = await pool.query("SELECT * FROM organismo");
+console.log(result3.rows);

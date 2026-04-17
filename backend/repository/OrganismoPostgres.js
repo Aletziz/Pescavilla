@@ -34,12 +34,36 @@ export class OrganismoRepositoryPostgres extends OrganismoRepository {
         return null;
       }
 
-      // Devuelve el primer registro
-      return result.rows[0];
+      const row = result.rows[0];
+      // Devuelve el registro como objeto
+      return new Organismo({
+        id_organismo: row.id_organismo,
+        nombre: row.nombre
+      });
 
     } catch (error) {
       console.error("Error en OrganismoRepository.findById:", error);
       throw new Error("Error al obtener organismo por id");
+    }
+  }
+
+  async create(data){
+    try{
+      const safeName = data.nombre.replace(/'/g, "''");
+      const query = `INSERT INTO organismo (nombre)
+                      VALUES ('${safeName}')
+                      RETURNING id_organismo, nombre`;
+      const result = await pool.query(query);
+
+      const row = result.rows[0];
+      return new Organismo({
+        id_organismo: row.id_organismo,
+        nombre: row.nombre
+      });
+
+    }catch(err){
+      console.error("Error en OrganismoRepository.create: ", err);
+      throw new Error("Error al crear organismo nuevo");
     }
   }
 

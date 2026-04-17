@@ -8,7 +8,7 @@ const errorHandler = (err, req, res, next) => {
     return res.status(400).json({
       error: "Datos inválidos",
       details: err.issues.map(e => ({
-        field: e.path.join("."),
+        parametro: e.path.join("."),
         message: e.message,
       })),
     });

@@ -14,4 +14,8 @@ export class OrganismoController{
         const data = await this.servicio.findById(id);
         res.json(data);
     }
+    create = async(req, res, next) =>{
+        const result = await this.servicio.create(req.body);
+        res.json(result);
+    }
 }

@@ -1,13 +1,7 @@
-import errorHandler from "./errorHandler.js";
+import {AppError} from '../../utils/AppError.js';
 
 const notFound =  (req, res, next) => {
-  const error = new Error("Ruta no encontrada");
-
-  error.statusCode = 404;
-  error.path = req.path;
-  error.method = req.method;
-
-  next(error);
+    next(new AppError("Ruta no encontrada", 404));
 };
 
 export default notFound;
