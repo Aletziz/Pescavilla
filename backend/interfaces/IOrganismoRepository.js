@@ -18,4 +18,8 @@ export class OrganismoRepository {
   async delete(id) {
     throw new Error("Metodo no implementado");
   }
+
+  async getUebsByOrganismo(idOrganismo){
+    throw new Error("Metodo no implementado");
+  }
 }

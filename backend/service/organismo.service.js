@@ -50,4 +50,14 @@ export class OrganismoService{
             throw new AppError("Error creando organismo",500);
         }
     }
+
+    async getUebsByOrganismo(idOrganismo){
+        try{
+            const uebs = await this.repository.getUebsByOrganismo(idOrganismo);
+            return uebs;
+        }catch(error){
+            console.error("Error en OrganismoService.getUebsByOrganismo:", error);
+            throw new AppError("Error al obtener UEBs del organismo", 500);
+        }
+    }
 }

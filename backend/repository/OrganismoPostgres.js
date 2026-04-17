@@ -1,4 +1,6 @@
 import { Organismo } from "../model/organismoModel.js";
+import { Ueb } from "../model/uebModel.js";
+
 import { OrganismoRepository } from "../interfaces/IOrganismoRepository.js";
 import pool from "../config/database.js";
 
@@ -64,6 +66,23 @@ export class OrganismoRepositoryPostgres extends OrganismoRepository {
     }catch(err){
       console.error("Error en OrganismoRepository.create: ", err);
       throw new Error("Error al crear organismo nuevo");
+    }
+  }
+
+  async getUebsByOrganismo(idOrganismo) {
+    try {
+      const query = "SELECT id_ueb, nombre_ueb, id_organismo FROM ueb WHERE id_organismo = $1";
+      const result = await pool.query(query, [idOrganismo]);
+
+      
+      return result.rows.map(row => new Ueb({
+        id_ueb: row.id_ueb,
+        nombre_ueb: row.nombre_ueb,
+        id_organismo: row.id_organismo
+      }));
+    } catch (error) {
+      console.error("Error en OrganismoRepository.getUebsByOrganismo:", error);
+      throw new Error("Error al obtener UEBs del organismo");
     }
   }
 

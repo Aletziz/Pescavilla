@@ -18,4 +18,10 @@ export class OrganismoController{
         const result = await this.servicio.create(req.body);
         res.json(result);
     }
+
+    getUebs = async (req, res, next) => {
+        const { id } = req.params;
+        const data = await this.servicio.getUebsByOrganismo(id);
+        res.json(data);
+    }
 }

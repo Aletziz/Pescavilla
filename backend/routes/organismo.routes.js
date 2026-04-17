@@ -11,6 +11,7 @@ export default function organismoRoutes(controller) {
 
   router.get("/", asyncHandler(controller.getAll));
   router.get("/:id", validate(idSchema, "params") ,asyncHandler(controller.findById));
+  router.get("/:id/uebs", validate(idSchema, "params"), asyncHandler(controller.getUebs));
   
   router.post("/", validate(createOrganismoSchema), asyncHandler(controller.create));
 
