@@ -1,4 +1,4 @@
-import { AppError } from "../utils/AppError.js";
+import { AppError } from "../errors/index.js";
 
 export class UebService {
   constructor(repository) {
@@ -6,11 +6,8 @@ export class UebService {
   }
 
   async getAll() {
-    try {
+    
       const uebs = await this.repository.findAll();
       return uebs;
-    } catch (error) {
-      throw new AppError("Error al obtener UEBs", 500);
-    }
   }
 }

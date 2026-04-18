@@ -1,6 +1,6 @@
 import express from "express";
 import asyncHandler from "../utils/asyncHandler.js";
-import validate from "../middlewares/global/validate.js";
+import validate from "../utils/validate.js";
 
 //validaciones
 import { idSchema } from "../validations/organismo.validation.js";
