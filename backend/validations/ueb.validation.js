@@ -22,26 +22,14 @@ export const createUebSchema = z.object({
     .positive("El id_organismo debe ser un entero positivo"),
 });
 
-// UPDATE (PUT)
+// UPDATE (PUT) — solo campos del body, el id viene de params
 export const updateUebSchema = z.object({
-  id: z
-    .string()
-    .transform((val) => Number(val))
-    .refine((val) => Number.isInteger(val) && val > 0, {
-      message: "ID inválido",
-    }),
-
   nombre_ueb: z
-    .string({
-      required_error: "El nombre_ueb es obligatorio",
-    })
+    .string({ required_error: "El nombre_ueb es obligatorio" })
     .min(1, "El nombre_ueb no puede estar vacío")
     .transform((val) => val.toLowerCase()),
-
   id_organismo: z
-    .number({
-      required_error: "El id_organismo es obligatorio",
-    })
+    .number({ required_error: "El id_organismo es obligatorio" })
     .int()
     .positive("El id_organismo debe ser un entero positivo"),
 });
