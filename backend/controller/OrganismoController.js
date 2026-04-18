@@ -14,4 +14,26 @@ export class OrganismoController{
         const data = await this.servicio.findById(id);
         res.json(data);
     }
+    create = async(req, res, next) =>{
+        const result = await this.servicio.create(req.body);
+        res.status(201).json(result);
+    }
+
+    getUebs = async (req, res, next) => {
+        const { id } = req.params;
+        const data = await this.servicio.getUebsByOrganismo(id);
+        res.json(data);
+    }
+
+    delete = async (req, res, next) => {
+        const { id } = req.params;
+        const data = await this.servicio.delete(id);
+        res.json(data);
+    }
+
+    update = async (req, res, next) => {
+        const { id } = req.params;
+        const data = await this.servicio.update(id, req.body);
+        res.json(data);
+    }
 }

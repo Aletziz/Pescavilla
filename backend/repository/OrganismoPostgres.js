@@ -1,4 +1,6 @@
 import { Organismo } from "../model/organismoModel.js";
+import { Ueb } from "../model/uebModel.js";
+
 import { OrganismoRepository } from "../interfaces/IOrganismoRepository.js";
 import pool from "../config/database.js";
 
@@ -34,12 +36,90 @@ export class OrganismoRepositoryPostgres extends OrganismoRepository {
         return null;
       }
 
-      // Devuelve el primer registro
-      return result.rows[0];
+      const row = result.rows[0];
+      // Devuelve el registro como objeto
+      return new Organismo({
+        id_organismo: row.id_organismo,
+        nombre: row.nombre
+      });
 
     } catch (error) {
       console.error("Error en OrganismoRepository.findById:", error);
       throw new Error("Error al obtener organismo por id");
+    }
+  }
+
+  async create(data){
+    try{
+      const safeName = data.nombre.replace(/'/g, "''");
+      const query = `INSERT INTO organismo (nombre)
+                      VALUES ('${safeName}')
+                      RETURNING id_organismo, nombre`;
+      const result = await pool.query(query);
+
+      const row = result.rows[0];
+      return new Organismo({
+        id_organismo: row.id_organismo,
+        nombre: row.nombre
+      });
+
+    }catch(err){
+      console.error("Error en OrganismoRepository.create: ", err);
+      throw new Error("Error al crear organismo nuevo");
+    }
+  }
+
+  async getUebsByOrganismo(idOrganismo) {
+    try {
+      const query = "SELECT id_ueb, nombre_ueb, id_organismo FROM ueb WHERE id_organismo = $1";
+      const result = await pool.query(query, [idOrganismo]);
+
+      
+      return result.rows.map(row => new Ueb({
+        id_ueb: row.id_ueb,
+        nombre_ueb: row.nombre_ueb,
+        id_organismo: row.id_organismo
+      }));
+    } catch (error) {
+      console.error("Error en OrganismoRepository.getUebsByOrganismo:", error);
+      throw new Error("Error al obtener UEBs del organismo");
+    }
+  }
+
+  async delete(idOrganismo) {
+    try {
+      const query = "DELETE FROM organismo WHERE id_organismo = $1 RETURNING id_organismo";
+      const result = await pool.query(query, [idOrganismo]);
+
+      if (result.rows.length === 0) {
+        return null;
+      }
+
+      return result.rows[0];
+    } catch (error) {
+      console.error("Error en OrganismoRepository.delete:", error);
+      throw new Error("Error al eliminar organismo");
+    }
+  }
+
+  async update(id, data) {
+    try {
+      const safeName = data.nombre.replace(/'/g, "''");
+      const query = `UPDATE organismo SET nombre = $1 WHERE id_organismo = $2 RETURNING id_organismo, nombre`;
+      const result = await pool.query(query, [safeName, id]);
+
+      if (result.rows.length === 0) {
+        return null;
+      }
+
+      const row = result.rows[0];
+      return new Organismo({
+        id_organismo: row.id_organismo,
+        nombre: row.nombre
+      });
+    } catch (error) {
+      console.error("Error en OrganismoRepository.update:", error);
+      throw new Error("Error al actualizar organismo");
     }
   }
 
