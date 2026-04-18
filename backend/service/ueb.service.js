@@ -1,56 +1,55 @@
-import { AppError } from "../errors/index.js";
+import { AppError, NotFoundError} from "../errors/index.js";
+import {Ueb} from "../model/uebModel.js"
+
 
 export class UebService {
-  constructor(repository) {
-    this.repository = repository;
+  constructor(UebRepository, organismoService) {
+    this.repository = UebRepository;
+    this.organismoService = organismoService; 
   }
 
   async getAll() {
-    
       const uebs = await this.repository.findAll();
       return uebs;
   }
 
   async getById(id) {
-    try {
       const ueb = await this.repository.findById(id);
-      if (!ueb) throw new AppError("UEB no encontrada", 404);
+      if (!ueb) throw new NotFoundError("UEB no encontrada");
       return ueb;
-    } catch (error) {
-      if (error instanceof AppError) throw error;
-      throw new AppError("Error al obtener UEB", 500);
-    }
   }
 
   async create(data) {
-    try {
-      const ueb = await this.repository.create(data);
-      return ueb;
-    } catch (error) {
-      if (error instanceof AppError) throw error;
-      throw new AppError("Error al crear UEB", 500);
-    }
+      const organismo = await this.organismoService.findById(data.id_organismo);
+
+      if(!organismo) throw new NotFoundError("Organismo no encontrado");
+
+      const ueb = new Ueb({nombre_ueb: data.nombre_ueb, id_organismo: data.id_organismo});
+
+      return await this.repository.create(ueb); 
   }
 
   async update(id, data) {
-    try {
-      const ueb = await this.repository.update(id, data);
-      if (!ueb) throw new AppError("UEB no encontrada", 404);
-      return ueb;
-    } catch (error) {
-      if (error instanceof AppError) throw error;
-      throw new AppError("Error al actualizar UEB", 500);
-    }
+      const ueb = await this.repository.findById(id);
+      const organismo = await this.organismoService.findById(data.id_organismo);
+
+      if(!ueb)throw new NotFoundError("Ueb no existe");
+      if(!organismo)throw new NotFoundError("Organismo no existe");
+
+      const UebActualizado = new Ueb({nombre_ueb: data.nombre_ueb, id_organismo: data.id_organismo});
+      
+      return await this.repository.update(id, UebActualizado);  
+    
   }
 
   async delete(id) {
-    try {
-      const deleted = await this.repository.delete(id);
-      if (!deleted) throw new AppError("UEB no encontrada", 404);
-      return { message: "UEB eliminada correctamente" };
-    } catch (error) {
-      if (error instanceof AppError) throw error;
-      throw new AppError("Error al eliminar UEB", 500);
-    }
+    const Ueb = await this.repository.findById(id);
+
+    if(!Ueb) throw new NotFoundError("Ueb no existe");
+    
+    await this.repository.delete(id);
+
+    return { mensaje: "Ueb eliminado correctamente", id };
+
   }
 }

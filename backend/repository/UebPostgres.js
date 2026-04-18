@@ -60,7 +60,7 @@ export class UebRepositoryPostgres extends IUebRepository {
         data.nombre_ueb,
         data.id_organismo,
       ]);
-
+      
       return new Ueb({
         id_ueb: result.rows[0].id_ueb,
         nombre_ueb: result.rows[0].nombre_ueb,
@@ -68,6 +68,7 @@ export class UebRepositoryPostgres extends IUebRepository {
       });
     } catch (error) {
       console.error("Error en UebRepository.create:", error);
+      
       throw new Error("Error al crear UEB");
     }
   }
@@ -109,7 +110,7 @@ export class UebRepositoryPostgres extends IUebRepository {
       const query = "DELETE FROM ueb WHERE id_ueb = $1 RETURNING id_ueb";
       const result = await pool.query(query, [id]);
 
-      return result.rows.length > 0;
+      return result.rows[0];
     } catch (error) {
       console.error("Error en UebRepository.delete:", error);
       throw new Error("Error al eliminar UEB");

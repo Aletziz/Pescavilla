@@ -16,7 +16,7 @@ export class OrganismoController{
     }
     create = async(req, res, next) =>{
         const result = await this.servicio.create(req.body);
-        res.json(result);
+        res.status(201).json(data);
     }
 
     getUebs = async (req, res, next) => {

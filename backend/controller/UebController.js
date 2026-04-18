@@ -10,7 +10,7 @@ export class UebController {
 
   getById = async (req, res, next) => {
     const { id } = req.params;
-    const data = await this.servicio.getById(Number(id));
+    const data = await this.servicio.getById(id);
     res.json(data);
   };
 
@@ -21,13 +21,13 @@ export class UebController {
 
   update = async (req, res, next) => {
     const { id } = req.params;
-    const data = await this.servicio.update(Number(id), req.body);
+    const data = await this.servicio.update(id, req.body);
     res.json(data);
   };
 
   delete = async (req, res, next) => {
     const { id } = req.params;
-    const data = await this.servicio.delete(Number(id));
+    const data = await this.servicio.delete(id);
     res.json(data);
   };
 }

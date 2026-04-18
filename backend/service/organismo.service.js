@@ -15,11 +15,8 @@ export class OrganismoService{
         
         const organismo = await this.repository.findById(id);
         
-        if(!organismo){
-            throw new NotFoundError(
-            "Organismo no existe"
-            )
-        }
+        if(!organismo) throw new NotFoundError("Organismo no encontrado");
+        
         return organismo;
         
     }
@@ -39,30 +36,25 @@ export class OrganismoService{
         return await this.repository.getUebsByOrganismo(idOrganismo);
     }
 
-    async delete(id){
-        
-        const organismo = await this.repository.findById(id);
-            
-        if(!organismo){
-            throw new NotFoundError(
-                "Organismo no existe"
-            )
-        }
 
-        await this.repository.delete(id);
-        return { mensaje: "Organismo eliminado correctamente", id };
-        
-    }
 
     async update(id, data){
         const organismo = await this.repository.findById(id);
         
-        if(!organismo){
-            throw new NotFoundError("Organismo no existe");
-        }
-
+        if(!organismo) throw new NotFoundError("Organismo no existe");
+       
         const organismoActualizado = new Organismo({nombre: data.nombre});
 
         return await this.repository.update(id, organismoActualizado);    
+    }
+
+    async delete(id){
+        const organismo = await this.repository.findById(id);
+            
+        if(!organismo) throw new NotFoundError("Organismo no existe");
+        
+        await this.repository.delete(id);
+        
+        return { mensaje: "Organismo eliminado correctamente", id };   
     }
 }
